@@ -5,7 +5,15 @@ inquirer
     {
         type: 'input',
         name: 'text' ,
-        message: 'Please enter 3 letter text',
+        message: 'Enter 3 letter text',
+        validate: function(input) {
+            if(input.length === 3) {
+                return true; 
+            } else {
+                return 'No more than 3 letters please';
+            }
+                
+        }
     },
     {
         type: 'color',
