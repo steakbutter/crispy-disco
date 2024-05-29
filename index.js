@@ -35,7 +35,7 @@ inquirer
         choices: ['triangle', 'square', 'circle'],
     },
     {
-        type: 'color',
+        type: 'input',
         name: 'shapeColor',
         message: 'Enter shape color',
         validate: function(input) {
@@ -50,5 +50,5 @@ inquirer
     
 ])
 .then((response) =>
-    console.log((`Your favorite color is ${response.textColor}!`))
+    console.log((`Generated logo.svg`))
   );
