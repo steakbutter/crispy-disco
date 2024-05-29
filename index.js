@@ -1,5 +1,6 @@
-const inquirer = require('inquirer')
+const inquirer = require('inquirer');
 
+inquirer
 .prompt([
     {
         type: 'input',
@@ -15,6 +16,7 @@ const inquirer = require('inquirer')
         type: 'list',
         name: 'shape',
         message: 'choose a shape',
+        choices: ['triangle', 'square', 'circle'],
     },
     {
         type: 'color',
@@ -22,4 +24,7 @@ const inquirer = require('inquirer')
         message: 'Enter shape color',
     }, 
     
-]);
+])
+.then((response) =>
+    console.log((`Your favorite color is ${response.textColor}!`))
+  );
