@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 
 inquirer
 .prompt([
@@ -49,6 +50,11 @@ inquirer
     }, 
     
 ])
-.then((response) =>
-    console.log((`Generated logo.svg`))
-  );
+.then((data) => {
+    const createLogo = generateLogo(data);
+
+    fs.writeFile('Logo.svg', createLogo, (err) =>
+    err ? console.log(err) : console.log('Generated Logo.svg'));
+    
+}
+);
