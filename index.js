@@ -20,7 +20,7 @@ inquirer
         name: 'textColor',
         message: 'Enter text color',
         validate: function(input) {
-            const colorOption = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^red$|^blue$|^green$|^yellow$|^cyan$|^magenta$/;
+            const colorOption = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^red$|^blue$|^green$|^yellow$|^white$|^black$|^cyan$|^magenta$/;
             if (colorOption.test(input)) {
                 return true;
             } else {
@@ -38,6 +38,14 @@ inquirer
         type: 'color',
         name: 'shapeColor',
         message: 'Enter shape color',
+        validate: function(input) {
+            const colorOption = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^red$|^blue$|^green$|^yellow$|^white$|^black$|^cyan$|^magenta$/;
+            if (colorOption.test(input)) {
+                return true;
+            } else {
+                return 'Enter a valid color keyword or hexadecimal number'
+            }
+        }
     }, 
     
 ])
