@@ -1,10 +1,12 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Triangle = require('./lib/triangle')
-const Svg = require('./lib/svg')
-// const Square = require('../crispy-disco/lib/square')
-const renderSvg = ({ text, textColor, shape }) => 
-    
+const Triangle = require('./lib/triangle');
+const Circle = require('./lib/circle');
+const Square = require('./lib/square');
+const Svg = require('./lib/svg');
+
+const renderSvg = ({ text, textColor, shape }) =>
+
     `<svg version="1.1"
 width="300" height="200"
 xmlns="http://www.w3.org/2000/svg">
@@ -17,70 +19,75 @@ ${shape.render()}
 </svg>
 `;
 
-   
+
 
 
 inquirer
-.prompt([
-    {
-        type: 'input',
-        name: 'text' ,
-        message: 'Enter 3 letter text',
-        validate: function(input) {
-            if(input.length === 3) {
-                return true; 
-            } else {
-                return 'No more than 3 letters please';
-            }
-                
-        }
-    },
-    {
-        type: 'input',
-        name: 'textColor',
-        message: 'Enter text color',
-        validate: function(input) {
-            const colorOption = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^red$|^blue$|^green$|^yellow$|^white$|^black$|^cyan$|^magenta$/;
-            if (colorOption.test(input)) {
-                return true;
-            } else {
-                return 'Enter a valid color keyword or hexadecimal number'
-            }
-        }
-    },
-    {
-        type: 'list',
-        name: 'shape',
-        message: 'choose a shape',
-        choices: ['triangle', 'square', 'circle'],
-    },
-    {
-        type: 'input',
-        name: 'shapeColor',
-        message: 'Enter shape color',
-        validate: function(input) {
-            const colorOption = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^red$|^blue$|^green$|^yellow$|^white$|^black$|^cyan$|^magenta$/;
-            if (colorOption.test(input)) {
-                return true;
-            } else {
-                return 'Enter a valid color keyword or hexadecimal number'
-            }
-        }
-    }, 
-    
-])
-.then((data) => { 
-    let shape;
-    if(data.shape === 'triangle'){
-        shape = new Triangle();
-        shape.setColor(data.shapeColor)
-    } console.log(shape);
-    const svg = new Svg();
-    svg.setText(data.textColor, data.text);
-    svg.setShape(shape);
+    .prompt([
+        {
+            type: 'input',
+            name: 'text',
+            message: 'Enter 3 letter text',
+            validate: function (input) {
+                if (input.length === 3) {
+                    return true;
+                } else {
+                    return 'No more than 3 letters please';
+                }
 
-    fs.writeFile('Logo.svg', svg, (err) =>
-    err ? console.log(err) : console.log('Generated Logo.svg'));
-    
-}
-);
+            }
+        },
+        {
+            type: 'input',
+            name: 'textColor',
+            message: 'Enter text color',
+            validate: function (input) {
+                const colorOption = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^red$|^blue$|^green$|^yellow$|^white$|^black$|^cyan$|^magenta$/;
+                if (colorOption.test(input)) {
+                    return true;
+                } else {
+                    return 'Enter a valid color keyword or hexadecimal number'
+                }
+            }
+        },
+        {
+            type: 'list',
+            name: 'shape',
+            message: 'choose a shape',
+            choices: ['triangle', 'square', 'circle'],
+        },
+        {
+            type: 'input',
+            name: 'shapeColor',
+            message: 'Enter shape color',
+            validate: function (input) {
+                const colorOption = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^red$|^blue$|^green$|^yellow$|^white$|^black$|^cyan$|^magenta$/;
+                if (colorOption.test(input)) {
+                    return true;
+                } else {
+                    return 'Enter a valid color keyword or hexadecimal number'
+                }
+            }
+        },
+
+    ])
+    .then((data) => {
+        let shape;
+        if (data.shape === 'triangle') {
+            shape = new Triangle();
+        } else if (data.shape === 'circle') {
+            shape = new Circle();
+        } else if (data.shape === 'square') {
+            shape = new Square();
+            shape.setColor(data.shapeColor);
+            console.log(shape);
+        }
+        const svg = new Svg();
+        svg.setText(data.textColor, data.text);
+        svg.setShape(shape);
+
+        fs.writeFile('Logo.svg', svg, (err) =>
+            err ? console.log(err) : console.log('Generated Logo.svg'));
+
+    }
+    );
