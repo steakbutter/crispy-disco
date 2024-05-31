@@ -1,3 +1,4 @@
+// Imported classes
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Triangle = require('./lib/triangle');
@@ -5,23 +6,22 @@ const Circle = require('./lib/circle');
 const Square = require('./lib/square');
 const Svg = require('./lib/svg');
 
-const renderSvg = ({ text, textColor, shape }) =>
+// const renderSvg = ({ text, textColor, shape }) =>
 
-    `<svg version="1.1"
-width="300" height="200"
-xmlns="http://www.w3.org/2000/svg">
+//     `<svg version="1.1"
+// width="300" height="200"
+// xmlns="http://www.w3.org/2000/svg">
 
-<rect width="100%" height="100%" fill="white" />
+// <rect width="100%" height="100%" fill="white" />
 
-${shape.render()}
-<text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text>
+// ${shape.render()}
+// <text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text>
 
-</svg>
-`;
-
-
+// </svg>
+// `;
 
 
+// Questions added to inquirer npm
 inquirer
     .prompt([
         {
@@ -71,6 +71,7 @@ inquirer
         },
 
     ])
+    //Response after answering questions
     .then((data) => {
         let shape;
         if (data.shape === 'triangle') {
@@ -86,6 +87,7 @@ inquirer
         svg.setText(data.textColor, data.text);
         svg.setShape(shape);
 
+        // writing the SVG file 
         fs.writeFile('Logo.svg', svg, (err) =>
             err ? console.log(err) : console.log('Generated Logo.svg'));
 
