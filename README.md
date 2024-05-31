@@ -18,16 +18,16 @@ Install a package.json file by typing 'npm init -y' in the terminal <br>
 Install 'Inquirer' npm. <br>
 
 ## Usage
-
+Link to video Demo of SVG logo file: https://drive.google.com/file/d/1N5MVRQF3wuTVsnL7a-Agr4Mf-P0w3MOX/view?usp=sharing<br>
+Create a Logo.svg file: <br>
+![alt text](<examples/LogoSVG create.gif>)
 GitHub repository link: https://github.com/steakbutter/crispy-disco <br>
+Triangle, Circle and Square classes test: <br>
+![alt text](<examples/shapes test passed.gif>) 
 
 
 ## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+N/A.
 
 ## License
+N/A.
