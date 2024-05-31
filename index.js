@@ -1,17 +1,23 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const renderSvg = ({ text, textColor, shape, shapeColor }) =>
-    `<svg version="1.1"
-        width="300" height="200"
-        xmlns="http://www.w3.org/2000/svg">
-   
-     <rect width="100%" height="100%" fill="white" />
+const Triangle = require('./lib/triangle')
+const Svg = require('./lib/svg')
+// const Square = require('../crispy-disco/lib/square')
+const renderSvg = ({ text, textColor, shape }) => 
     
-     <circle cx="150" cy="100" r="80" fill="${shapeColor}" />
-     <text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text>
+    `<svg version="1.1"
+width="300" height="200"
+xmlns="http://www.w3.org/2000/svg">
+
+<rect width="100%" height="100%" fill="white" />
+
+${shape.render()}
+<text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text>
+
+</svg>
+`;
+
    
-   </svg>
-        `;
 
 
 inquirer
@@ -63,10 +69,17 @@ inquirer
     }, 
     
 ])
-.then((data) => {
-    const createLogo = renderSvg(data)
+.then((data) => { 
+    let shape;
+    if(data.shape === 'triangle'){
+        shape = new Triangle();
+        shape.setColor(data.shapeColor)
+    } console.log(shape);
+    const svg = new Svg();
+    svg.setText(data.textColor, data.text);
+    svg.setShape(shape);
 
-    fs.writeFile('Logo.svg', createLogo, (err) =>
+    fs.writeFile('Logo.svg', svg, (err) =>
     err ? console.log(err) : console.log('Generated Logo.svg'));
     
 }
